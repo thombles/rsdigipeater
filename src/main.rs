@@ -35,7 +35,6 @@ fn handle_frame(frame: Vec<u8>, devices: &Vec<NetDev>, socket: &Ax25RawSocket) {
             let addr_str = format!("{}", next_hop.repeater);
             for d in devices {
                 if d.name == addr_str {
-                    println!("Found one for me!");
                     // Flip the bit to say it's been repeated before we transmit
                     next_hop.has_repeated = true;
                     transmit_ifindex = Some(d.ifindex);
