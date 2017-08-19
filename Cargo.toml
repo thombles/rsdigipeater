@@ -4,4 +4,6 @@ version = "0.1.0"
 authors = ["Thomas Karpiniec <tk@1.21jiggawatts.net>"]
 
 [dependencies]
-ax25 = { path = "../ax25", features = ["linux"] }
+ax25 = { version = "0.1.0", features = ["linux"] }
+chrono = "0.4"
+

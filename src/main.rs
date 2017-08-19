@@ -1,6 +1,8 @@
 extern crate ax25;
+extern crate chrono;
 
 use std::io;
+use chrono::prelude::*;
 use ax25::linux::{Ax25RawSocket, NetDev};
 use ax25::frame::Ax25Frame;
 
@@ -42,6 +44,9 @@ fn handle_frame(frame: Vec<u8>, devices: &Vec<NetDev>, socket: &Ax25RawSocket) {
             }
         }
         if let Some(ifindex) = transmit_ifindex {
+            let time = Local::now();
+            let timestamp = time.format("%Y-%m-%d %H:%M:%S").to_string();
+            println!("{} from {} to {} len {}", timestamp, parsed.source, parsed.destination, frame.len());
             if let Err(e) = socket.send_frame(&parsed.to_bytes(), ifindex) {
                 println!("Error transmitting: {}", e);
             }
